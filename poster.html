@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ORLUNE — The Sickle Coast</title>
+<style>
+  :root {
+    --deep:   #0B3341;
+    --lagoon: #1E7C86;
+    --stone:  #F2E3C9;
+    --gold:   #E8A24A;
+    --paper:  #FBF6EC;
+    --accent: #C4553B;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1024px; height: 1024px; background: var(--deep); }
+  #poster {
+    position: relative;
+    width: 1024px; height: 1024px;
+    overflow: hidden;
+    font-family: "TeX Gyre Pagella", "P052", "Nimbus Roman", Georgia, serif;
+  }
+  #art { position: absolute; inset: 0; display: block; }
+  #type { position: absolute; inset: 0; }
+
+  .name {
+    position: absolute;
+    top: 118px; left: 0; right: 0;
+    text-align: center;
+    font-size: 140px;
+    line-height: 1;
+    letter-spacing: 0.17em;
+    text-indent: 0.17em;
+    font-weight: 400;
+    color: var(--paper);
+  }
+  .rule-top {
+    position: absolute;
+    top: 94px; left: 50%; transform: translateX(-50%);
+    width: 128px; height: 2px;
+    background: var(--accent);
+  }
+  .descriptor {
+    position: absolute;
+    top: 286px; left: 0; right: 0;
+    text-align: center;
+    font-size: 21px;
+    letter-spacing: 0.50em;
+    text-indent: 0.50em;
+    color: var(--paper);
+    opacity: 0.88;
+  }
+  .foot-rule { position: absolute; left: 92px; right: 92px; height: 1px; background: var(--paper); }
+  .foot-mark {
+    position: absolute;
+    left: 50%; top: 994px; transform: translateX(-50%);
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+  }
+</style>
+</head>
+<body>
+<div id="poster">
+  <svg id="art" width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- sky: deep at the top, golden hour at the waterline -->
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0.00" stop-color="#0B3341"/>
+        <stop offset="0.26" stop-color="#114B5C"/>
+        <stop offset="0.48" stop-color="#1B6572"/>
+        <stop offset="0.68" stop-color="#2C8083"/>
+        <stop offset="0.84" stop-color="#A97A4C"/>
+        <stop offset="0.94" stop-color="#D4913F"/>
+        <stop offset="1.00" stop-color="#E8A24A"/>
+      </linearGradient>
+
+      <!-- sea: warm at the waterline, deep in the foreground -->
+      <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0.00" stop-color="#E8A24A"/>
+        <stop offset="0.05" stop-color="#BE7F49"/>
+        <stop offset="0.14" stop-color="#1E7C86"/>
+        <stop offset="0.44" stop-color="#155F6E"/>
+        <stop offset="1.00" stop-color="#0B3341"/>
+      </linearGradient>
+
+      <!-- the Sickle's inner face: lit along the crest, shading down, bounce light at the foot -->
+      <linearGradient id="stone" x1="0" y1="540" x2="0" y2="790" gradientUnits="userSpaceOnUse">
+        <stop offset="0.00" stop-color="#FAF0DC"/>
+        <stop offset="0.24" stop-color="#EFDCBB"/>
+        <stop offset="0.56" stop-color="#D3B78C"/>
+        <stop offset="0.80" stop-color="#C3A175"/>
+        <stop offset="1.00" stop-color="#CBA97C"/>
+      </linearGradient>
+
+      <radialGradient id="sunglow" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0.00" stop-color="#FBF6EC" stop-opacity="0.95"/>
+        <stop offset="0.30" stop-color="#F4DFB4" stop-opacity="0.40"/>
+        <stop offset="1.00" stop-color="#E8A24A" stop-opacity="0"/>
+      </radialGradient>
+
+      <filter id="softer"><feGaussianBlur stdDeviation="13"/></filter>
+
+      <clipPath id="under"><rect x="0" y="782" width="1024" height="242"/></clipPath>
+
+      <!-- the crescent: a lune, outer disc (512,344) r416 less inner disc (512,-57) r647.
+           horns at 109.7,449.7 and 914.3,449.7; crest 590 at the centre; foot 760. -->
+      <mask id="sickle">
+        <rect x="0" y="0" width="1024" height="1024" fill="#000"/>
+        <circle cx="512" cy="344" r="416" fill="#fff"/>
+        <circle cx="512" cy="-57" r="647" fill="#000"/>
+      </mask>
+    </defs>
+
+    <!-- sky -->
+    <rect x="0" y="0" width="1024" height="662" fill="url(#sky)"/>
+
+    <!-- the sun, low in the cradle of the crescent -->
+    <circle cx="512" cy="512" r="104" fill="url(#sunglow)"/>
+    <circle cx="512" cy="512" r="36" fill="#FBF6EC"/>
+
+    <!-- haze along the waterline -->
+    <rect x="0" y="650" width="1024" height="14" fill="#FBF6EC" opacity="0.38"/>
+
+    <!-- sea -->
+    <rect x="0" y="660" width="1024" height="364" fill="url(#sea)"/>
+
+    <!-- the sun's column, just under the waterline -->
+    <g fill="#FBF6EC">
+      <rect x="498" y="670" width="52" height="4" rx="2" opacity="0.40"/>
+      <rect x="486" y="684" width="76" height="4" rx="2" opacity="0.28"/>
+      <rect x="500" y="700" width="48" height="4" rx="2" opacity="0.18"/>
+    </g>
+
+    <!-- ripples -->
+    <g stroke="#FBF6EC" stroke-width="1.5" opacity="0.15">
+      <line x1="60"  y1="672" x2="286" y2="672"/>
+      <line x1="742" y1="680" x2="972" y2="680"/>
+      <line x1="108" y1="708" x2="372" y2="708"/>
+      <line x1="648" y1="724" x2="920" y2="724"/>
+      <line x1="44"  y1="806" x2="336" y2="806"/>
+      <line x1="668" y1="836" x2="984" y2="836"/>
+      <line x1="196" y1="900" x2="498" y2="900"/>
+      <line x1="580" y1="944" x2="840" y2="944"/>
+    </g>
+
+    <!-- reflection of the Sickle, mirrored about its foot at y=760 -->
+    <g clip-path="url(#under)" filter="url(#softer)" opacity="0.24">
+      <g transform="translate(0,1520) scale(1,-1)">
+        <g mask="url(#sickle)">
+          <circle cx="512" cy="344" r="416" fill="#D8BE97"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- the Sickle -->
+    <g mask="url(#sickle)">
+      <circle cx="512" cy="344" r="416" fill="url(#stone)"/>
+    </g>
+
+    <!-- light catching the foot, where the stone meets the lagoon -->
+    <g mask="url(#sickle)">
+      <circle cx="512" cy="344" r="416" fill="none" stroke="#F2DEB6" stroke-width="3" opacity="0.40"/>
+    </g>
+
+    <!-- terraces cut into the inner face -->
+    <g mask="url(#sickle)" fill="none" stroke="#0B3341" stroke-linecap="round" opacity="0.18">
+      <circle cx="512" cy="-57" r="660" stroke-width="1.7"/>
+      <circle cx="512" cy="-57" r="674" stroke-width="1.7"/>
+      <circle cx="512" cy="-57" r="688" stroke-width="1.7"/>
+    </g>
+
+    <!-- the town on the crest of the crescent -->
+    <g mask="url(#sickle)">
+      <g fill="#0B3341">
+        <rect x="663.5" y="572.8" width="10" height="22"/>
+        <rect x="616.4" y="582.2" width="16" height="34"/>
+        <rect x="575.1" y="588.5" width="9"  height="20"/>
+        <rect x="528.1" y="591.6" width="13" height="27"/>
+        <rect x="483.9" y="591.6" width="11" height="23"/>
+        <rect x="436.9" y="588.5" width="15" height="32"/>
+        <rect x="394.6" y="582.2" width="10" height="21"/>
+        <rect x="349.0" y="572.8" width="13" height="26"/>
+      </g>
+      <g fill="#F0C070">
+        <rect x="618.4" y="592.0" width="3" height="4"/>
+        <rect x="625.0" y="592.0" width="3" height="4"/>
+        <rect x="529.9" y="601.0" width="3" height="4"/>
+        <rect x="438.9" y="598.0" width="3" height="4"/>
+        <rect x="444.9" y="598.0" width="3" height="4"/>
+        <rect x="485.9" y="601.0" width="3" height="4"/>
+      </g>
+    </g>
+
+    <!-- lit crest along the inner arc -->
+    <g mask="url(#sickle)">
+      <circle cx="512" cy="-57" r="647" fill="none" stroke="#FBF6EC" stroke-width="4.5" opacity="0.95"/>
+    </g>
+  </svg>
+
+  <div id="type">
+    <div class="rule-top"></div>
+    <div class="name">ORLUNE</div>
+    <div class="descriptor">THE SICKLE COAST</div>
+    <div class="foot-rule" style="top: 954px;"></div>
+    <div class="foot-rule" style="top: 972px; opacity: 0.16;"></div>
+    <div class="foot-mark"></div>
+  </div>
+</div>
+</body>
+</html>
